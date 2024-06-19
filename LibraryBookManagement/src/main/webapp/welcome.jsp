@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<header>
-			<h1>Please select opeartion from the left menu</h1>
+			<h1>Please select operation from the left menu</h1>
 			<p>Enjoy Reading!!!</p>
 		</header>
 	</div>

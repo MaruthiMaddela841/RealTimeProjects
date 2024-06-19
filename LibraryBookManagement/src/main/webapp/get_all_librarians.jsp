@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Students</title>
+    <title>Students Records</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -100,18 +100,18 @@ body {
 </head>
 <body>
  
-    <h1>Students</h1>
+    <h1>Librarians</h1>
     <table>
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
         </tr>
-        <c:forEach var="student" items="${students}">
+       <c:forEach var="librarian" items="${librarians}">
             <tr>
-                <td>${student.id}</td>
-                <td>${student.name}</td>
-                <td>${student.email}</td>
+                <td>${librarian.id}</td>
+                <td>${librarian.name}</td>
+                <td>${librarian.email}</td>
             </tr>
         </c:forEach>
     </table>
