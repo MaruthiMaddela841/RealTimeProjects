@@ -1,0 +1,45 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+         version="3.1">
+    <servlet>
+        <servlet-name>BookServlet</servlet-name>
+        <servlet-class>in.ineuron.servlets.BookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookServlet</servlet-name>
+        <url-pattern>/books</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>StudentServlet</servlet-name>
+        <servlet-class>in.ineuron.servlets.StudentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentServlet</servlet-name>
+        <url-pattern>/students</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LibrarianServlet</servlet-name>
+        <servlet-class>in.ineuron.servlets.LibrarianServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LibrarianServlet</servlet-name>
+        <url-pattern>/librarians</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>IssueBookServlet</servlet-name>
+        <servlet-class>in.ineuron.servlets.IssueBookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IssueBookServlet</servlet-name>
+        <url-pattern>/issue</url-pattern>
+    </servlet-mapping>
+    
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
