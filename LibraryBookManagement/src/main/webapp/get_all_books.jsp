@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Librarian Records</title>
+    <title>Book Records</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -100,23 +100,25 @@ body {
 </head>
 <body>
  
-    <h1>LIBRARIAN</h1>
+    <h1>BOOK</h1>
     <table>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
         </tr>
-        <c:forEach var="librarian" items="${librarians}">
+        <c:forEach var="book" items="${books}">
             <tr>
-                <td>${librarian.id}</td>
-                <td>${librarian.name}</td>
-                <td>${librarian.email}</td>
+                <td>${book.id}</td>
+                <td>${book.title}</td>
+                <td>${book.author}</td>
+                <td>${book.category}</td>
             </tr>
         </c:forEach>
     </table>
     <div class="form-group text-center">
-			<a href="${pageContext.request.contextPath}/librarian_operations.html" class="btn">LIBRARIAN HOME</a>
+			<a href="${pageContext.request.contextPath}/books_operations.html" class="btn">BOOKS HOME</a>
 	</div>
 </body>
 </html>

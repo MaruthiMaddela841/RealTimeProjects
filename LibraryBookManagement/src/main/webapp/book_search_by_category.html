@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Search Librarian</title>
+    <title>Search Book</title>
     <style>
 .btn {
     display: inline-block;
@@ -70,18 +70,18 @@ body {
 </head>
 <body>
     <div class="container">
-        <h2>Search Librarian By Name</h2>
-        <form action="./librarian/searchByName" method="POST">
+        <h2>Search Book By Category</h2>
+        <form action="./book/searchByCategory" method="POST">
             <div class="form-group">
-                <label for="name">Librarian Name:</label>
-                <input type="text" id="name" name="name" required>
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category" required>
             </div>
             <div class="form-group">
                 <button type="submit">Search</button>
             </div>
         </form>
         <div class="form-group text-center">
-			<a href="librarian_operations.html" class="btn">LIBRARIAN HOME</a>
+			<a href="books_operations.html" class="btn">BOOKS HOME</a>
 		</div>
     </div>
 </body>

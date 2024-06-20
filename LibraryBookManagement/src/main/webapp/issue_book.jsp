@@ -45,12 +45,12 @@
 <body>
     <div class="container">
         <h2>Issue Book</h2>
-        <form action="./issue" method="post">
+        <form action="./issue/register" method="post">
+        	<label for="studentId">Student ID:</label>
+            <input type="text" id="studentId" name="studentId" required><br><br>
+            
             <label for="bookId">Book ID:</label>
             <input type="text" id="bookId" name="bookId" required><br><br>
-            
-            <label for="studentId">Student ID:</label>
-            <input type="text" id="studentId" name="studentId" required><br><br>
             
             <input type="submit" value="Issue Book">
         </form>

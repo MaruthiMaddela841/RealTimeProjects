@@ -2,9 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Search Librarian</title>
+    <title>Update Book</title>
     <style>
-.btn {
+ .btn {
     display: inline-block;
     padding: 10px 20px;
     background-color: #007bff;
@@ -70,18 +70,30 @@ body {
 </head>
 <body>
     <div class="container">
-        <h2>Search Librarian By Name</h2>
-        <form action="./librarian/searchByName" method="POST">
-            <div class="form-group">
-                <label for="name">Librarian Name:</label>
-                <input type="text" id="name" name="name" required>
+        <h2>Update Book</h2>
+        <form action="./book/updateBook" method="POST">
+        <div class="form-group">
+                <label for="id">Book Id:</label>
+                <input type="text" id="id" name="id" required>
             </div>
             <div class="form-group">
-                <button type="submit">Search</button>
+                <label for="title">Book Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="author">Book Author:</label>
+                <input type="text" id="author" name="author" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Book Category:</label>
+                <input type="text" id="category" name="category" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Update</button>
             </div>
         </form>
-        <div class="form-group text-center">
-			<a href="librarian_operations.html" class="btn">LIBRARIAN HOME</a>
+         <div class="form-group text-center">
+			<a href="books_operations.html" class="btn">BOOKS HOME</a>
 		</div>
     </div>
 </body>

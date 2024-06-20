@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Search Librarian</title>
-    <style>
+    <title>Register Book</title>
+<style>
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -70,18 +70,26 @@ body {
 </head>
 <body>
     <div class="container">
-        <h2>Search Librarian By Name</h2>
-        <form action="./librarian/searchByName" method="POST">
+        <h2>Register Book</h2>
+        <form action="./book/registerBook" method="POST">
             <div class="form-group">
-                <label for="name">Librarian Name:</label>
-                <input type="text" id="name" name="name" required>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
             </div>
             <div class="form-group">
-                <button type="submit">Search</button>
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">REGISTER</button>
             </div>
         </form>
         <div class="form-group text-center">
-			<a href="librarian_operations.html" class="btn">LIBRARIAN HOME</a>
+			<a href="books_operations.html" class="btn">BOOKS HOME</a>
 		</div>
     </div>
 </body>
