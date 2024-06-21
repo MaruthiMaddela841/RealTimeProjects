@@ -1,11 +1,14 @@
 package com.example.librarymanagement.servlets;
 
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -69,15 +72,18 @@ public class IssueBookServlet extends HttpServlet {
 		studentStatement.setInt(1, studentId);
 		studentStatement.setInt(2, bookId);
 		studentStatement.executeUpdate();
-		allIssuedRecords(request, response, connection);
+		List<BookIssue> bookIssues = latestRecords(connection,studentId);
+		request.setAttribute("bookIssues", bookIssues);
+		request.getRequestDispatcher("../student_mapped_books.jsp").forward(request, response);
 	}
 
 	private void allIssuedRecords(HttpServletRequest request, HttpServletResponse response, Connection connection) throws SQLException, ServletException, IOException {
 		PreparedStatement studentStatement = connection.prepareStatement(
-				"SELECT s.id AS studentId, s.name AS studentName, b.id AS bookId, b.title AS bookTitle "
-						+ "FROM students s " + "JOIN issues i ON s.id = i.student_id "
-						+ "JOIN books b ON i.book_id = b.id " +
-		                "ORDER BY s.id ASC");
+			    "SELECT s.id AS studentId, s.name AS studentName, b.id AS bookId, b.title AS bookTitle, i.librarian AS librarian " +
+			    "FROM students s " +
+			    "JOIN issues i ON s.id = i.student_id " +
+			    "JOIN books b ON i.book_id = b.id " +
+			    "ORDER BY s.id ASC");
 		ResultSet studentResultSet = studentStatement.executeQuery();
 
 		List<BookIssue> bookIssues = new ArrayList<>();
@@ -87,7 +93,9 @@ public class IssueBookServlet extends HttpServlet {
 			bookIssue.setStudentName(studentResultSet.getString("studentName"));
 			bookIssue.setBookId(studentResultSet.getInt("bookId"));
 			bookIssue.setBookTitle(studentResultSet.getString("bookTitle"));
+			bookIssue.setLibrarian(studentResultSet.getString("librarian"));
 			bookIssues.add(bookIssue);
+			System.out.println(bookIssue);
 		}
 
 		request.setAttribute("bookIssues", bookIssues);
@@ -157,6 +165,24 @@ public class IssueBookServlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 		int studentId = Integer.parseInt(request.getParameter("studentId"));
 		int bookId = Integer.parseInt(request.getParameter("bookId"));
+		String librarianName=request.getParameter("librarianName");
+		if(!checkLibrarian(connection2,request,librarianName)) {
+			int librarianvalidation=-1;
+			request.setAttribute("librarianvalidation", librarianvalidation);
+			request.getRequestDispatcher("../invalid_librarian.jsp").forward(request, response);
+			return;
+		}
+		String issueDateStr = request.getParameter("issueDate");
+		// Parse issueDateStr into java.sql.Date
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    java.util.Date parsedDate;
+	    java.sql.Date issueDate = null;
+	    try {
+	        parsedDate = dateFormat.parse(issueDateStr);
+	        issueDate = new java.sql.Date(parsedDate.getTime());
+	    } catch (ParseException e) {
+	        e.printStackTrace(); // Handle parsing exception
+	    }
 		PreparedStatement checkStatement = connection2
 				.prepareStatement("SELECT COUNT(*) AS bookCount FROM issues WHERE student_id = ?");
 		checkStatement.setInt(1, studentId);
@@ -183,17 +209,28 @@ public class IssueBookServlet extends HttpServlet {
 		}
 
 		PreparedStatement statement = connection2
-				.prepareStatement("INSERT INTO issues (student_id, book_id, issue_date, due_date) VALUES (?, ?, ?, ?)");
+				.prepareStatement("INSERT INTO issues (student_id, book_id, issue_date,librarian) VALUES (?, ?, ?,?)");
 		statement.setInt(1, studentId);
 		statement.setInt(2, bookId);
-		Date issueDate = new Date(System.currentTimeMillis());
 		statement.setDate(3, issueDate);
-		Date dueDate = new Date(issueDate.getTime() + 15L * 24 * 60 * 60 * 1000); // 15 days later
-		statement.setDate(4, dueDate);
+		statement.setString(4,librarianName);
 		statement.executeUpdate();
 		bookIssues=latestRecords(connection2,studentId);
 		request.setAttribute("bookIssues", bookIssues);
 		request.getRequestDispatcher("../student_mapped_books.jsp").forward(request, response);
+	}
+
+	private boolean checkLibrarian(Connection connection2,HttpServletRequest request, String librarianName) throws SQLException {
+		PreparedStatement statement = connection2
+				.prepareStatement("SELECT count(*) as libCount FROM librarians WHERE name=?");
+		statement.setString(1,librarianName);
+		ResultSet rs = statement.executeQuery();
+		if(rs.next() && rs.getInt("libCount")==1) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

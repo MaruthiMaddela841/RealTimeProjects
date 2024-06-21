@@ -184,6 +184,11 @@ tr:nth-child(even) {
 					<td>Please pay the due amount and return the book!!!</td>
 				</tr>
 			</c:when>
+			<c:when test="${dueAmount == -3}">
+				<tr>
+					<td>Please select valid librarian name</td>
+				</tr>
+			</c:when>
 		</c:choose>
 	</table>
 

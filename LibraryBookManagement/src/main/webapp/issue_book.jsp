@@ -52,6 +52,12 @@
             <label for="bookId">Book ID:</label>
             <input type="text" id="bookId" name="bookId" required><br><br>
             
+            <label for="librarianName">Librarian Name:</label>
+            <input type="text" id="librarianName" name="librarianName" required><br><br>
+            
+            <label for="issueDate">Issue Date:</label>
+            <input type="date" id="issueDate" name="issueDate" required><br><br>
+            
             <input type="submit" value="Issue Book">
         </form>
     </div>

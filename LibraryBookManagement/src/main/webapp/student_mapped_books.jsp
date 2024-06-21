@@ -107,6 +107,7 @@ body {
             <th>STUDENT NAME</th>
             <th>BOOK ID</th>
             <th>BOOK TITLE</th>
+            <th>ISSUED LIBRARIAN</th>
         </tr>
         <c:forEach var="bookIssue" items="${bookIssues}">
             <tr>
@@ -114,6 +115,7 @@ body {
                 <td>${bookIssue.studentName}</td>
                 <td>${bookIssue.bookId}</td>
                 <td>${bookIssue.bookTitle}</td>
+                <td>${bookIssue.librarian}</td>
             </tr>
         </c:forEach>
     </table>
