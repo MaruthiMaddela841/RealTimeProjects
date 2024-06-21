@@ -1,12 +1,13 @@
 package com.example.librarymanagement.servlets;
 
 import java.io.IOException;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +46,30 @@ public class IssueBookServlet extends HttpServlet {
 			else if (request.getRequestURI().endsWith("returnBook")) {
 				returnBook(request, response, connection);
 			}
+			else if (request.getRequestURI().endsWith("deleteIssueRecord")) {
+				deleteReturnedRecord(request, response, connection);
+			}
 		} catch (SQLException e) {
 			throw new ServletException(e);
 		}
+	}
+
+	private void deleteReturnedRecord(HttpServletRequest request, HttpServletResponse response, Connection connection) throws ServletException, IOException, SQLException {
+		int studentId = Integer.parseInt(request.getParameter("studentId"));
+		int bookId = Integer.parseInt(request.getParameter("bookId"));
+		String paidValue=request.getParameter("paidReturnedCheckbox");
+		String notPaidValue=request.getParameter("notPaidCheckbox");
+		if(notPaidValue!=null) {
+			int dueAmount=-2;
+			request.setAttribute("dueAmount", dueAmount);
+			request.getRequestDispatcher("../due_calculation.jsp").forward(request, response);
+			return;
+		}
+		PreparedStatement studentStatement = connection.prepareStatement("DELETE FROM issues WHERE student_id = ? AND book_id = ?;");
+		studentStatement.setInt(1, studentId);
+		studentStatement.setInt(2, bookId);
+		studentStatement.executeUpdate();
+		allIssuedRecords(request, response, connection);
 	}
 
 	private void allIssuedRecords(HttpServletRequest request, HttpServletResponse response, Connection connection) throws SQLException, ServletException, IOException {
@@ -96,21 +118,38 @@ public class IssueBookServlet extends HttpServlet {
 		int studentId = Integer.parseInt(request.getParameter("studentId"));
 		int bookId = Integer.parseInt(request.getParameter("bookId"));
 		PreparedStatement checkStatement = connection
-				.prepareStatement("SELECT * FROM issues WHERE student_id = ? and book_id=?");
+				.prepareStatement("SELECT * FROM issues WHERE student_id = ? and book_id=?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 		checkStatement.setInt(1, studentId);
 		checkStatement.setInt(2, bookId);
+		int dueAmount=0;
 		ResultSet rs = checkStatement.executeQuery();
-		
-		List<BookIssue> bookIssues=latestRecords(connection,studentId);
-		int count=0;
-		while(rs.next()) {
-			if(count==0) {
-				
-				request.setAttribute("bookIssues", bookIssues);
-				request.getRequestDispatcher("../issue_error.jsp").forward(request, response);
-			}
-			count++;
+		if(!rs.next()) {
+			dueAmount=-1;
+			request.setAttribute("dueAmount", dueAmount);
+			request.getRequestDispatcher("../due_calculation.jsp").forward(request, response);
+			return;
 		}
+		Date issue_date=rs.getDate("issue_date");
+		
+		// Convert java.sql.Date to java.time.LocalDate
+		LocalDate local_issue_date = issue_date.toLocalDate();
+		LocalDate local_due_date = LocalDate.now();
+
+		// Calculate the number of days between the two dates (inclusive)
+		long daysBetween = ChronoUnit.DAYS.between(local_issue_date, local_due_date) + 1;
+		
+		int daysCounter=(int) daysBetween;
+		if(daysBetween>15) {
+			while(daysCounter!=15) {
+				dueAmount=dueAmount+10;
+				daysCounter--;
+			}
+		}
+		request.setAttribute("daysBetween", daysBetween);
+		request.setAttribute("dueAmount", dueAmount);
+		request.setAttribute("studentId", studentId);
+		request.setAttribute("bookId", bookId);
+		request.getRequestDispatcher("../due_calculation.jsp").forward(request, response);
 		
 	}
 
