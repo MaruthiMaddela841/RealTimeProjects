@@ -33,6 +33,7 @@
                         <td>
                             <a href="./edit-customer.jsp?id=${customer.id}" class="btn btn-edit">Edit</a>
                             <a href="./deleteCustomer?id=${customer.id}" class="btn btn-delete">Delete</a>
+                            <a href="./notifyCustomer?id=${customer.id}" class="btn btn-delete">Notify</a>
                         </td>
                     </tr>
                 </c:forEach>

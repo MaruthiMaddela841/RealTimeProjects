@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Sign Up</title>
+    <link rel="stylesheet" href="css/customer_login.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form action="CustomerAddPage" method="POST" class="form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" required>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <p class="form-footer">Already have an account? <a href="index.html">Login</a></p>
+    </div>
+</body>
+</html>

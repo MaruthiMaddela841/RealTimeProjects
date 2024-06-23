@@ -7,12 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login</title>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/styles.css">
+	href="${pageContext.request.contextPath}/css/admin_login.css">
 </head>
 <body>
 	<div class="login-container">
 		<h2>Login</h2>
-		<form action="${pageContext.request.contextPath}/loginPage"
+		<form action="${pageContext.request.contextPath}/AdminLoginPage"
 			method="POST">
 			<div class="form-group">
 				<label for="username">Username:</label> <input type="text"

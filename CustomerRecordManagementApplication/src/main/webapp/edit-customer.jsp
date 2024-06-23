@@ -12,15 +12,19 @@
     <h2>Edit Customer</h2>
     <form action="${pageContext.request.contextPath}/updateCustomerDetails" method="POST">
         <input type="hidden" name="id" value="${param.id}">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="${param.name}" placeholder="admin" required><br><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="${param.email}" required><br><br>
-        <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone" value="${param.phone}" required><br><br>
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address" value="${param.address}" required><br><br>
-        <button type="submit">Update Customer</button>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="${param.name}" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="${param.email}" required><br><br>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" value="${param.phone}" required><br><br>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="${param.address}" required><br><br>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="${param.username}" required><br><br>
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password" value="${param.password}" required><br><br>
+            <button type="submit" class="btn">Update Customer</button>
     </form>
 </body>
 </html>

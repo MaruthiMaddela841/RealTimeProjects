@@ -1,0 +1,103 @@
+/* dashboard.css */
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin-bottom: 5px;
+}
+
+.main-content {
+    display: flex;
+    gap: 20px;
+}
+
+.left-section, .right-section {
+    flex: 1;
+}
+
+.middle-section {
+    flex: 2;
+}
+
+section {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Styles for logout button */
+.btn-logout {
+    background-color: #f44336; /* Red background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding inside the button */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline from text */
+    display: inline-block; /* Display as inline-block */
+    font-size: 16px; /* Font size */
+    margin-top: 10px; /* Top margin */
+    margin-right: 10px; /* Right margin */
+    cursor: pointer; /* Pointer cursor on hover */
+    float: right; /* Float right to position at the top right corner */
+}
+
+.btn-logout:hover {
+    background-color: #d32f2f; /* Darker red background color on hover */
+}
+
+
+.btn-edit-profile {
+    margin-top: 10px;
+}
