@@ -13,7 +13,7 @@ import in.ineuron.util.DatabaseConnection;
 
 public class CustomerDAO {
 
-    public List<Customer> getAllCustomers() throws SQLException {
+	public List<Customer> getAllCustomers() throws SQLException {
         List<Customer> customers = new ArrayList<>();
         String sql = "SELECT * FROM customers";
 
