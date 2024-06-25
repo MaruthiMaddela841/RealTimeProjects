@@ -108,9 +108,8 @@ public class TransactionDAO {
 	            return -1;
 	        }
 	    } catch (SQLException e) {
-	        // Rollback transaction on exception
 	        e.printStackTrace();
-	        throw e; // Rethrow exception or handle it as needed
+	        throw e;
 	    }
 	}
 
