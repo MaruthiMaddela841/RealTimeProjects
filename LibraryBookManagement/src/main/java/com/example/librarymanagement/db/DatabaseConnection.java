@@ -12,7 +12,7 @@ public class DatabaseConnection {
         } catch (Exception ex) {
         }
 	}
-    private static final String URL = "jdbc:mysql:///jdbcsessions";
+    private static final String URL = "jdbc:mysql:///library_management";
     private static final String USER = "root";
     private static final String PASSWORD = "Maru@841";
 

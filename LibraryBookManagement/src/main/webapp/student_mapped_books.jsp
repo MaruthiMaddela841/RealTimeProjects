@@ -119,8 +119,5 @@ body {
             </tr>
         </c:forEach>
     </table>
-    <div class="form-group text-center">
-			<a href="${pageContext.request.contextPath}/issue_book.jsp" class="btn">ISSUE BOOK HOME</a>
-	</div>
 </body>
 </html>

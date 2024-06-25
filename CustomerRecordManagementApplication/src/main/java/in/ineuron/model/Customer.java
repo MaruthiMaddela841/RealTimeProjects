@@ -6,8 +6,29 @@ public class Customer {
     private String email;
     private String phone;
     private String address;
+    private String accountType;
 	private String username;
 	private String password;
+	public Customer() {
+		super();
+	}
+	public Customer(int id, String name, String email, String phone, String address, String accountType,
+			String username, String password) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.accountType = accountType;
+		this.username = username;
+		this.password = password;
+	}
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address="
+				+ address + ", accountType=" + accountType + ", username=" + username + ", password=" + password + "]";
+	}
 	public int getId() {
 		return id;
 	}
@@ -38,6 +59,12 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getAccountType() {
+		return accountType;
+	}
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -49,24 +76,6 @@ public class Customer {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address="
-				+ address + ", username=" + username + ", password=" + password + "]";
-	}
-	public Customer(int id, String name, String email, String phone, String address, String username, String password) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.address = address;
-		this.username = username;
-		this.password = password;
-	}
-	public Customer() {
-		super();
 	}
 	
 	

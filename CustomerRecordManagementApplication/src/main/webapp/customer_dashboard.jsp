@@ -143,6 +143,8 @@
             <div id="sendMoney" class="show">
                 <h2>Send Money Form</h2><br>
                 <form action="${pageContext.request.contextPath}/ProcessSendMoneyServlet" method="POST">
+                <input type="hidden" id="accountId" name="accountId" value="${account.accountId}">
+                <input type="hidden" id="customerId" name="customerId" value="${customer.id}">
                     <label for="fromAccountNo">From Account Number:</label>
                     <input type="text" id="fromAccountNo" value="${account.accountNumber}"name="fromAccountNo" required>
                     <label for="toAccountNo">To Account Number:</label>
@@ -155,8 +157,8 @@
                     </select>
                     <label for="amount">Amount:</label>
                     <input type="number" id="amount" name="amount" required>
-                    <label for="amount">Amount:</label>
-                    <input type="number" id="amount" name="amount" required>
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" required>
                     <button type="submit">Send Money</button>
                 </form>
             </div>

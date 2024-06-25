@@ -28,6 +28,7 @@ public class UpdateCustomersServlet extends HttpServlet{
 		System.out.println("UpdateCustomersServlet.doProcess()");
 		CustomerDAO customerDAO = new CustomerDAO();
 		int id = Integer.parseInt(request.getParameter("id"));
+		System.out.println("ID is:"+id);
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
@@ -47,6 +48,7 @@ public class UpdateCustomersServlet extends HttpServlet{
         try {
             customerDAO.updateCustomer(customer);
             Customer customerNew=customerDAO.getCustomer(id);
+            System.out.println("New Customer Details::"+customerNew);
             request.setAttribute("customer",customerNew);
             request.getRequestDispatcher("./customer_dashboard.jsp").forward(request, response);
         } catch (SQLException e) {

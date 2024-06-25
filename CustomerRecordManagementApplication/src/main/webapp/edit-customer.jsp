@@ -11,7 +11,7 @@
 <body>
     <h2>Edit Customer</h2>
     <form action="${pageContext.request.contextPath}/updateCustomerDetails" method="POST">
-        <input type="hidden" name="id" value="${param.id}">
+        <input type="hidden" name="id" value="${customer.id}">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="${param.name}" required><br><br>
             <label for="email">Email:</label>

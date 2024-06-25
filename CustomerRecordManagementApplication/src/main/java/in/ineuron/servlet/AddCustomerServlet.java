@@ -25,13 +25,14 @@ public class AddCustomerServlet extends HttpServlet {
         doProcess(req, resp);
     }
 
-    private void doProcess(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void doProcess(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         System.out.println("AddCustomerServlet.doProcess()");
         CustomerDAO customerDAO = new CustomerDAO();
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
+        String accountType=request.getParameter("accountType");
         String username=request.getParameter("username");
         String password=request.getParameter("password");
         Customer customer = new Customer();
@@ -41,9 +42,10 @@ public class AddCustomerServlet extends HttpServlet {
         customer.setAddress(address);
         customer.setUsername(username);
         customer.setPassword(password);
+        customer.setAccountType(accountType);
         try {
             customerDAO.addCustomer(customer);
-            response.sendRedirect("./customer_dashboard.jsp");
+            request.getRequestDispatcher("./index.html").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
         }
