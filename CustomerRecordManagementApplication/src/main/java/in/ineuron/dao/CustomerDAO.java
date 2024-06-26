@@ -17,7 +17,7 @@ public class CustomerDAO {
 
 	public List<Customer> getAllCustomers() throws SQLException {
 		List<Customer> customers = new ArrayList<>();
-		String sql = "SELECT * FROM customers";
+		String sql = "SELECT * FROM customers WHERE id IN (SELECT customer_id FROM bank_accounts WHERE is_active=1)";
 
 		try (Connection connection = DatabaseConnection.getConnection();
 				Statement statement = connection.createStatement();
@@ -30,6 +30,8 @@ public class CustomerDAO {
 				customer.setEmail(resultSet.getString("email"));
 				customer.setPhone(resultSet.getString("phone"));
 				customer.setAddress(resultSet.getString("address"));
+				customer.setUsername(resultSet.getString("username"));
+				customer.setPassword(resultSet.getString("password"));
 				customers.add(customer);
 			}
 		}
@@ -104,7 +106,7 @@ public class CustomerDAO {
 	}
 
 	public void deleteCustomer(int id) throws SQLException {
-		String sql = "DELETE FROM customers WHERE id =?";
+		String sql = "UPDATE bank_accounts SET is_active=0 WHERE customer_id=?";
 		try (Connection connection = DatabaseConnection.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setInt(1, id);
@@ -113,7 +115,7 @@ public class CustomerDAO {
 	}
 
 	public Customer getCustomer(int id) throws SQLException {
-		String sql = "SELECT * FROM customers WHERE id=?";
+		String sql = "SELECT * FROM customers WHERE id=? AND id NOT IN (SELECT customer_id FROM bank_accounts WHERE is_active=0)";
 		Customer customer = new Customer();
 		try (Connection connection = DatabaseConnection.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sql)) {

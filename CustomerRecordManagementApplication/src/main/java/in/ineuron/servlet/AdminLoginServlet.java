@@ -50,7 +50,7 @@ public class AdminLoginServlet extends HttpServlet{
         		response.sendRedirect("dashboard");
         	}
         	else {
-                response.sendRedirect("index.jsp?error=Invalid%20username%20or%20password");
+                response.sendRedirect("admin_login.jsp?error=Invalid%20username%20or%20password");
             }
         }
         catch (SQLException e) {

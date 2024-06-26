@@ -44,7 +44,7 @@ public class DashboardServlet extends HttpServlet{
             List<Customer> customers = customerDAO.getAllCustomers();
             System.out.println(customers);
             request.setAttribute("customers", customers);
-            request.getRequestDispatcher("./dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("./admin_dashboard.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
         }

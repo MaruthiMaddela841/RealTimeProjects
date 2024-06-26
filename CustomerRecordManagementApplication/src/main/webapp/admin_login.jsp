@@ -24,6 +24,7 @@
 			</div>
 			<button type="submit" class="btn">Login</button>
 		</form>
+		<p class="form-footer">Customer? Login here: <a href="index.html">Login</a></p>
 		<c:if test="${not empty param.error}">
 			<p class="error">${param.error}</p>
 		</c:if>
