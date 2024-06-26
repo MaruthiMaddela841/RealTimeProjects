@@ -135,7 +135,9 @@ public class CustomerDAO {
 	}
 
 	public Customer isCustomerAdmin(String username, String password) throws SQLException {
-		String sql = "SELECT * FROM customers WHERE username =? and password=?";
+		String sql = "SELECT * FROM customers WHERE id IN (SELECT customer_id FROM bank_accounts WHERE is_active=1 \r\n"
+				+ "AND customer_id=(SELECT id FROM customers WHERE username=? AND PASSWORD=?))\r\n"
+				+ "";
 		Customer customer = new Customer();
 		try (Connection connection = DatabaseConnection.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sql)) {

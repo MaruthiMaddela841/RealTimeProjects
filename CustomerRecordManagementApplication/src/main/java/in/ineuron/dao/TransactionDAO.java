@@ -39,7 +39,7 @@ public class TransactionDAO {
 	
 	public int getAccountId(String accountName) throws SQLException {
 		List<Transaction> transactions=new ArrayList<>();
-		String sql = "SELECT account_id FROM bank_accounts WHERE account_number=?";
+		String sql = "SELECT account_id FROM bank_accounts WHERE account_number=? AND is_active=1";
 		try (Connection connection = DatabaseConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setString(1,accountName);
