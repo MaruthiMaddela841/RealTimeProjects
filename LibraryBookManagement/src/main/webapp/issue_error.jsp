@@ -124,6 +124,16 @@ body {
 					<td>This book has already been assigned to the Student</td>
 				</tr>
 			</c:when>
+			<c:when test="${not empty bookNotFound and bookNotFound eq -1}">
+				<tr>
+					<td>!!! Please Enter Correct Book Id !!!</td>
+				</tr>
+			</c:when>
+			<c:when test="${not empty studentNotFound and studentNotFound eq -1}">
+				<tr>
+					<td>!!! Please Enter Correct Student Id !!!</td>
+				</tr>
+			</c:when>
 		</c:choose>
 	</table>
 	 <table>
@@ -143,7 +153,7 @@ body {
         </c:forEach>
     </table>
 	<div class="form-group text-center">
-		<a href="${pageContext.request.contextPath}/issue_book.jsp"
+		<a href="${pageContext.request.contextPath}/issue/issueBookBefore"
 			class="btn">ISSUE BOOK HOME</a>
 	</div>
 </body>

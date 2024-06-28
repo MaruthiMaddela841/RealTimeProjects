@@ -183,6 +183,21 @@ public class IssueBookServlet extends HttpServlet {
 		int bookId = Integer.parseInt(request.getParameter("bookId"));
 		String librarianName=request.getParameter("librarianName");
 		String issueDateStr = request.getParameter("issueDate");
+
+
+		 PreparedStatement statementLibrarian = connection2.prepareStatement("SELECT * FROM librarians");
+	        List<Librarian> librarians = new ArrayList<>();
+	        try (ResultSet resultSet = statementLibrarian.executeQuery()) {
+	            while (resultSet.next()) {
+	                int id = resultSet.getInt("id");
+	                String name = resultSet.getString("name");
+	                String email = resultSet.getString("email");
+	                Librarian li = new Librarian(id, name, email);
+	                System.out.println(li);
+	                librarians.add(li);
+	            }
+	        }
+				
 		// Parse issueDateStr into java.sql.Date
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    java.util.Date parsedDate;
@@ -193,11 +208,36 @@ public class IssueBookServlet extends HttpServlet {
 	    } catch (ParseException e) {
 	        e.printStackTrace(); // Handle parsing exception
 	    }
+	    List<BookIssue> bookIssues=latestRecords(connection2,studentId);
+	    
+	    PreparedStatement studentStatement = connection2
+				.prepareStatement("SELECT COUNT(*) AS students_count FROM books WHERE id = ?");
+	    studentStatement.setInt(1, studentId);
+		ResultSet rsStudent = studentStatement.executeQuery();
+		if (rsStudent.next() && rsStudent.getInt("students_count") != 1) {
+			int studentNotFound=-1;
+			request.setAttribute("studentNotFound", studentNotFound);
+			request.setAttribute("bookIssues", bookIssues);
+			request.setAttribute("librarians", librarians);
+			request.getRequestDispatcher("/issue_error.jsp").forward(request, response);
+			return;
+		}
+	    
+		PreparedStatement bookStatement = connection2
+				.prepareStatement("SELECT COUNT(*) AS books_count FROM books WHERE id = ?");
+		bookStatement.setInt(1, bookId);
+		ResultSet rsBook = bookStatement.executeQuery();
+		if (rsBook.next() && rsBook.getInt("books_count") != 1) {
+			int bookNotFound=-1;
+			request.setAttribute("bookNotFound", bookNotFound);
+			request.setAttribute("bookIssues", bookIssues);
+			request.getRequestDispatcher("/issue_error.jsp").forward(request, response);
+			return;
+		}
 		PreparedStatement checkStatement = connection2
 				.prepareStatement("SELECT COUNT(*) AS bookCount FROM issues WHERE student_id = ?");
 		checkStatement.setInt(1, studentId);
 		ResultSet rs = checkStatement.executeQuery();
-		List<BookIssue> bookIssues=latestRecords(connection2,studentId);
 //		bookIssues.forEach(System.out::println);
 		if (rs.next() && rs.getInt("bookCount") >= 3) {
 			request.setAttribute("recordsCount", rs.getInt("bookCount"));

@@ -148,7 +148,7 @@ public class BookServlet extends HttpServlet {
         String title = request.getParameter("title");
         String author = request.getParameter("author");
         String category = request.getParameter("category");
-
+   
         PreparedStatement statement = connection.prepareStatement("INSERT INTO books (title, author, category) VALUES (?, ?, ?)");
         statement.setString(1, title);
         statement.setString(2, author);
