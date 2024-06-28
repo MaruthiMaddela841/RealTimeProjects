@@ -1,3 +1,5 @@
+/* admin_dashboard.css */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -74,7 +76,10 @@ footer {
     background-color: #0056b3;
 }
 
-/* Styles for logout button */
+.btn-edit-profile {
+    margin-top: 10px;
+}
+
 .btn-logout {
     background-color: #f44336; /* Red background color */
     color: white; /* White text color */
@@ -87,7 +92,6 @@ footer {
     margin-top: 10px; /* Top margin */
     margin-right: 10px; /* Right margin */
     cursor: pointer; /* Pointer cursor on hover */
-    float: left; /* Float right to position at the top right corner */
     border-radius: 4px; /* Rounded edges */
 }
 
@@ -95,283 +99,19 @@ footer {
     background-color: #d32f2f; /* Darker red background color on hover */
 }
 
-/* Transaction Table */
-.transaction-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.transaction-table th, .transaction-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.transaction-table th {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.transaction-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.transaction-table tr:hover {
-    background-color: #ddd;
-}
-
-.transaction-container {
-    max-height: 250px; /* Adjust the max-height as needed */
-    overflow-y: auto;
-}
-
-.transaction-table th,
-.transaction-table td {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-.btn-edit-profile {
-    margin-top: 10px;
-}
-
-/* Modal Styling */
-.modal-wrapper {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 1000; /* Higher than other content */
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    width: 400px;
-}
-
-.modal form {
-    display: grid;
-    gap: 10px;
-}
-
-.modal label {
-    font-weight: bold;
-}
-
-.modal input[type=text],
-.modal input[type=number] {
-    width: calc(100% - 10px);
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 14px;
-}
-
-.modal button[type=submit] {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.modal button[type=submit]:hover {
-    background-color: #0056b3;
-}
-
-.dynamic-content {
-    display: none; /* Initially hide dynamic content */
-}
-
-.show {
-    display: block; /* Show dynamic content */
-}
-
-/* Style for the Send Money button */
-.btn-send-money {
-    background-color: #4CAF50; /* Green background */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-/* Hover effect for the Send Money button */
-.btn-send-money:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
-/* Style for the Send Money form container */
-#sendMoney {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-/* Style for form headings in the Send Money form */
-#sendMoney h2 {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-/* Style for form inputs in the Send Money form */
-#sendMoney form {
-    display: flex;
-    flex-direction: column;
-}
-
-#sendMoney label {
-    margin-bottom: 10px;
-}
-
-#sendMoney input[type="text"],
-#sendMoney input[type="number"] {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
-}
-
-#sendMoney button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-/* Style for form dropdowns in the Send Money form */
-#sendMoney select {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
-}
-
-/* Optional: Style for dropdown options */
-#sendMoney select option {
-    padding: 10px;
-    font-size: 16px;
-}
-
-/* Style for the Show Transactions button */
-.btn-show-transactions {
-    background-color: #007bff; /* Blue background */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-/* Hover effect for the Show Transactions button */
-.btn-show-transactions:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
-
-/* Style for the account details table */
-.account-details {
-    width: 100%;
-    max-width: 600px; /* Adjust maximum width as per your layout */
-    margin-top: 10px;
-    border-collapse: collapse;
-    border: 1px solid #ddd; /* Add border around the table */
-}
-
-.account-details td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd; /* Bottom border for each row */
-    text-align: center;
-}
-
-.account-details .label {
-    font-weight: bold;
-}
-
-.account-details .green {
-    background-color: #4CAF50; /* Green background for first column */
-    color: white;
-}
-
-.account-details tr:nth-child(even) td:not(.label) {
-    background-color: #ffffff; /* Light gray background for even rows */
-}
-
-.account-details tr:nth-child(odd) td:not(.label) {
-    background-color: #ffffff; /* White background for odd rows */
-}
-
-.middle-section input[type="text"],
-.middle-section button[type="submit"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-@media screen and (max-width: 768px) {
-    .main-content {
-        flex-direction: column;
-    }
-
-    .customer-table {
-        font-size: 12px;
-    }
-
-    .customer-table th,
-    .customer-table td {
-        padding: 10px;
-    }
-}
 .customer-container {
-    margin-top: 20px;
+    max-height: 300px; /* Adjust the max-height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    max-height: 300px; /* Adjust max-height as needed */
-    overflow-y: auto; /* Enable vertical scrolling */
+    margin-top: 20px;
 }
 
 .customer-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
     font-size: 14px;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -435,4 +175,72 @@ footer {
 
 .btn-edit:hover, .btn-delete:hover {
     filter: brightness(90%);
+}
+
+@media screen and (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .customer-table {
+        font-size: 12px;
+    }
+
+    .customer-table th,
+    .customer-table td {
+        padding: 10px;
+    }
+}
+* Notification form container */
+#notificationForm {
+    display: none;
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+}
+
+#notificationForm h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#notificationForm p {
+    margin-bottom: 10px;
+}
+
+#notificationForm label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#notificationForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: vertical; /* Allow vertical resizing of textarea */
+}
+
+#notificationForm button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#notificationForm button[type="submit"]:hover {
+    background-color: #0056b3;
 }

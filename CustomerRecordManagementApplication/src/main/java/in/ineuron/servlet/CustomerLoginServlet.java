@@ -6,9 +6,11 @@ import java.util.List;
 
 import in.ineuron.dao.BankAccountDAO;
 import in.ineuron.dao.CustomerDAO;
+import in.ineuron.dao.NotificationDAO;
 import in.ineuron.dao.TransactionDAO;
 import in.ineuron.model.BankAccount;
 import in.ineuron.model.Customer;
+import in.ineuron.model.Notification;
 import in.ineuron.model.Transaction;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -49,10 +51,14 @@ public class CustomerLoginServlet extends HttpServlet{
             	List<Transaction> transactions = transactionDAO.getTransactionsByAccountId(account.getAccountId());
             	System.out.println(account);
             	transactions.forEach(System.out::println);
+            	NotificationDAO notificationDAO = new NotificationDAO();
+            	List<Notification> notifications = notificationDAO.getNotification(customer.getId());
+            	notifications.forEach(System.out::println);
         		HttpSession session=request.getSession();
         		session.setAttribute("customer", customer);
         		session.setAttribute("account", account);
         		session.setAttribute("transactions", transactions);
+        		session.setAttribute("notifications", notifications);
         		response.sendRedirect("./customer_dashboard.jsp");
         	}
         	else {

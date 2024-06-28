@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="in.ineuron.model.BankAccount"%>
+<%@ page import="in.ineuron.model.Notification"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +11,54 @@
 <title>Customer Dashboard</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/customer_dashboard.css">
+<!-- Include JavaScript functions -->
+<script>
+    function markNotificationAndOpenPopup(notificationId,customerId, message) {
+        console.log('Notification ID:', notificationId);
+        console.log('Message:', message);
+        openNotificationPopup(message,notificationId,customerId);
+    }
+
+    function openNotificationPopup(message,notificationId,customerId) {
+        document.getElementById('popupMessage').textContent = message;
+        document.getElementById('overlay').style.display = 'flex';
+        document.getElementById('overlay').setAttribute('data-notification-id', notificationId);
+        document.getElementById('overlay').setAttribute('data-customer-id', customerId);
+    }
+
+    function closeNotificationPopup() {
+        var notificationId = document.getElementById('overlay').getAttribute('data-notification-id');
+        var customerId = document.getElementById('overlay').getAttribute('data-customer-id');
+        document.getElementById('overlay').style.display = 'none';
+        
+        // Create a new XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+        
+        // Construct the URL for your servlet endpoint
+        var url = '${pageContext.request.contextPath}/readNotification';
+        var params = 'notificationId=' + encodeURIComponent(notificationId) + '&customerId=' + encodeURIComponent(customerId);
+        
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        
+        // Define the callback function for when the state of the request changes
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log('Notification marked as read successfully.');
+                    window.location.reload();
+                } else {
+                    console.error('Error marking notification as read.');
+                    window.location.reload();
+                }
+            }
+        };
+        
+        // Send the request with notificationId and customerId as data
+        xhr.send(params);
+    }
+
+    </script>
 </head>
 <body>
 	<div class="container">
@@ -60,11 +109,12 @@
 					</tr>
 					<!-- Add more rows for additional account details as needed -->
 				</table>
-
-
-				<!-- Dynamic content placeholder for transaction details or forms -->
-				<div id="dynamicContent" class="dynamic-content">
-					<!-- Initially empty -->
+				<!-- Modal Overlay -->
+				<div id="overlay" class="overlay">
+					<div id="modal" class="modal">
+						<span class="close" onclick="closeNotificationPopup()">&times;</span>
+						<p id="popupMessage"></p>
+					</div>
 				</div>
 
 				<!-- Transaction Details Table -->
@@ -113,9 +163,17 @@
 			<section class="right-section">
 				<h2>Notifications</h2>
 				<ul>
-					<li><a href="#">Notification 1</a></li>
-					<li><a href="#">Notification 2</a></li>
-					<!-- List notifications dynamically -->
+					<!-- Check if notifications list is empty -->
+					<c:if test="${empty notifications}">
+						<li>No Notifications</li>
+					</c:if>
+
+					<!-- Iterate over notifications for the current customer -->
+					<c:forEach var="notification" items="${notifications}">
+						<li><a href="#"
+							onclick="markNotificationAndOpenPopup(${notification.id},${customer.id},'${notification.message}')">
+								${notification.message} </a></li>
+					</c:forEach>
 				</ul>
 			</section>
 		</div>
@@ -186,6 +244,7 @@
         var showTransactionsBtn = document.getElementById('showTransactionsBtn');
         showTransactionsBtn.style.display = 'none';
     }
+   
 </script>
 
 </body>
